@@ -9,8 +9,8 @@ import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
 //import Loader from './Loader';
 //import { Textarea } from './ui/textarea';
-//import ReactDatePicker from 'react-datepicker';
-import { useToast } from './ui/use-toast';
+import ReactDatePicker from 'react-datepicker';
+//import { useToast } from './ui/use-toast';
 import { Input } from './ui/input';
 
 const initialValues = {
@@ -28,13 +28,14 @@ export const MeetingTypeList = () => {
   const [callDetail, setCallDetail] = useState<Call>();
   const client = useStreamVideoClient();
   const { user } = useUser();
-  const { toast } = useToast();
+  //const { toast } = useToast();
 
   const createMeeting = async () => {
     if (!client || !user) return;
     try {
       if (!values.dateTime) {
-        toast({ title: 'Please select a date and time' });
+        //toast({ title: 'Please select a date and time' });
+        console.log('Please select a date and time');
         return;
       }
       const id = crypto.randomUUID();
@@ -55,12 +56,14 @@ export const MeetingTypeList = () => {
       if (!values.description) {
         router.push(`/meeting/${call.id}`);
       }
-      toast({
-        title: 'Meeting Created',
-      });
+      // toast({
+      //   title: 'Meeting Created',
+      // });
+      console.log('Meeting Created');
     } catch (error) {
       console.error(error);
-      toast({ title: 'Failed to create Meeting' });
+      // toast({ title: 'Failed to create Meeting' });
+      console.log('Failed to create Meeting');
     }
   };
   return (
@@ -69,28 +72,28 @@ export const MeetingTypeList = () => {
         img="/icons/add-meeting.svg"
         title="New Meeting"
         description="Start an instant meeting"
-      //handleClick={() => setMeetingState('isInstantMeeting')}
+        handleClick={() => setMeetingState('isInstantMeeting')}
       />
       <HomeCard
         img="/icons/join-meeting.svg"
         title="Join Meeting"
         description="via invitation link"
         className="bg-blue-1"
-      //handleClick={() => setMeetingState('isJoiningMeeting')}
+        handleClick={() => setMeetingState('isJoiningMeeting')}
       />
       <HomeCard
         img="/icons/schedule.svg"
         title="Schedule Meeting"
         description="Plan your meeting"
         className="bg-purple-1"
-      //handleClick={() => setMeetingState('isScheduleMeeting')}
+        handleClick={() => setMeetingState('isScheduleMeeting')}
       />
       <HomeCard
         img="/icons/recordings.svg"
         title="View Recordings"
         description="Meeting Recordings"
         className="bg-yellow-1"
-      //handleClick={() => router.push('/recordings')}
+        handleClick={() => router.push('/recordings')}
       />
     </section>
   )
