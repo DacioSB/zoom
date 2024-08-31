@@ -1,13 +1,13 @@
 "use client"
 
-import * as React from "react"
-import * as Toast from "@radix-ui/react-toast"
-import { cva, type VariantProps } from "class-variance-authority"
-import { X } from "lucide-react"
+import * as React from "react";
+import * as Toast from "@radix-ui/react-toast";
+import { cva, type VariantProps } from "class-variance-authority";
+import { X } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-const ToastProvider = Toast.Provider
+const ToastProvider = Toast.Provider;
 
 const ToastViewPort = React.forwardRef<
   React.ElementRef<typeof Toast.Viewport>,
@@ -21,7 +21,7 @@ const ToastViewPort = React.forwardRef<
     )}
     {...props}
   />
-))
+));
 ToastViewPort.displayName = Toast.Viewport.displayName;
 
 const toastVariants = cva(
@@ -52,8 +52,8 @@ const StylizedToast = React.forwardRef<
       {...props}
     />
   )
-})
-StylizedToast.displayName = Toast.Root.displayName
+});
+StylizedToast.displayName = Toast.Root.displayName;
 
 const ToastAction = React.forwardRef<
   React.ElementRef<typeof Toast.Action>,
@@ -67,5 +67,62 @@ const ToastAction = React.forwardRef<
     )}
     {...props}
   />
-))
-ToastAction.displayName = Toast.Action.displayName
+));
+ToastAction.displayName = Toast.Action.displayName;
+
+const ToastClose = React.forwardRef<
+  React.ElementRef<typeof Toast.Close>,
+  React.ComponentPropsWithoutRef<typeof Toast.Close>
+>(({ className, ...props }, ref) => (
+  <Toast.Close
+    ref={ref}
+    className={cn(
+      "absolute right-2 top-2 rounded-md p-1 text-slate-950/50 opacity-0 transition-opacity hover:text-slate-950 focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600 dark:text-slate-50/50 dark:hover:text-slate-50",
+      className
+    )}
+    toast-close=""
+    {...props}
+  >
+    <X className="h-4 w-4" />
+  </Toast.Close>
+));
+ToastClose.displayName = Toast.Close.displayName;
+
+const ToastTitle = React.forwardRef<
+  React.ElementRef<typeof Toast.Title>,
+  React.ComponentPropsWithoutRef<typeof Toast.Title>
+>(({ className, ...props }, ref) => (
+  <Toast.Title
+    ref={ref}
+    className={cn("text-sm font-semibold", className)}
+    {...props}
+  />
+));
+ToastTitle.displayName = Toast.Title.displayName;
+
+const ToastDescription = React.forwardRef<
+  React.ElementRef<typeof Toast.Description>,
+  React.ComponentPropsWithoutRef<typeof Toast.Description>
+>(({ className, ...props }, ref) => (
+  <Toast.Description
+    ref={ref}
+    className={cn("text-sm opacity-90", className)}
+    {...props}
+  />
+));
+ToastDescription.displayName = Toast.Description.displayName;
+
+type ToastProps = React.ComponentPropsWithoutRef<typeof Toast.Root>;
+type ToastActionProps = React.ComponentPropsWithoutRef<typeof ToastAction>;
+
+export {
+  type ToastProps,
+  type ToastActionProps,
+  ToastProvider,
+  ToastViewPort,
+  Toast,
+  ToastTitle,
+  ToastDescription,
+  ToastClose,
+  ToastAction,
+}
