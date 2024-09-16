@@ -31,7 +31,11 @@ export const MeetingTypeList = () => {
   const { toast } = useToast();
 
   const createMeeting = async () => {
-    if (!client || !user) return;
+    if (!client || !user) {
+      console.log('Client or user not found', client, user);
+      return
+    };
+    console.log('Client and user found');
     try {
       if (!values.dateTime) {
         toast({ title: 'Please select a date and time' });
