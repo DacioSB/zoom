@@ -7,7 +7,7 @@ import HomeCard from './HomeCard';
 import MeetingModal from './MeetingModal';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
-//import Loader from './Loader';
+import Loader from './Loader';
 //import { Textarea } from './ui/textarea';
 import ReactDatePicker from 'react-datepicker';
 import { useToast } from './ui/use-toast';
@@ -70,6 +70,9 @@ export const MeetingTypeList = () => {
       console.log('Failed to create Meeting');
     }
   };
+
+  if (!client || !user) return <Loader />;
+
   const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetail?.id}`;
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
