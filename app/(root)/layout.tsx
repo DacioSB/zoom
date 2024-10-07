@@ -1,10 +1,16 @@
+import StreamClientProvider from '@/providers/StreamClientProvider';
 import React from 'react'
 
 function RootLayout({ children }: {
     children: React.ReactNode
 }) {
     return (
-        <main>{children}</main>
+
+        <main>
+            <StreamClientProvider>
+                {children}
+            </StreamClientProvider>
+        </main>
     )
 }
 
