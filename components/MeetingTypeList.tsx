@@ -8,7 +8,7 @@ import MeetingModal from './MeetingModal';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
 import Loader from './Loader';
-//import { Textarea } from './ui/textarea';
+import { Textarea } from './ui/textarea';
 import ReactDatePicker from 'react-datepicker';
 import { useToast } from './ui/use-toast';
 import { Input } from './ui/input';
@@ -57,13 +57,13 @@ export const MeetingTypeList = () => {
         },
       });
       setCallDetail(call);
+      console.log(values);
       if (!values.description) {
         router.push(`/meeting/${call.id}`);
       }
       toast({
         title: 'Meeting Created',
       });
-      console.log('Meeting Created');
     } catch (error) {
       console.error(error);
       toast({ title: 'Failed to create Meeting' });
@@ -115,12 +115,12 @@ export const MeetingTypeList = () => {
             <label className="text-base font-normal leading-[22.4px] text-sky-2">
               Add a description
             </label>
-            {/* <Textarea
+            <Textarea
               className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
               onChange={(e) =>
                 setValues({ ...values, description: e.target.value })
               }
-            /> */}
+            />
           </div>
           <div className="flex w-full flex-col gap-2.5">
             <label className="text-base font-normal leading-[22.4px] text-sky-2">
