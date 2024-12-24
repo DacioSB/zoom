@@ -151,18 +151,18 @@ function toast({... props}: Toast) {
 }
 
 function useToast() {
-    const [state, setState] = React.useState<State>(memoryState);
-    console.log('state', state);
+    const [state, setState] = React.useState<State>({ toasts: [] });
 
     React.useEffect(() => {
         listeners.push(setState);
+        setState(memoryState);
         return () => {
             const index = listeners.indexOf(setState);
             if (index > -1) {
                 listeners.splice(index, 1);
             }
         };
-    }, [state]);
+    }, []);
 
     return { ...state, toast, dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }) };
 }
