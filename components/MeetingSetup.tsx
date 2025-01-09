@@ -60,7 +60,7 @@ const MeetingSetup = ({
     return (
       <div className="flex h-screen w-full flex-col items-center justify-center gap-3 text-white">
         <h1 className="text-center text-2xl font-bold">Setup</h1>
-        <div className="relative w-full max-w-[640px] aspect-video">
+        <div className="relative w-full max-w-[640px] aspect-video mx-auto px-4 flex items-center justify-center">
           <VideoPreview className="w-full h-full object-cover rounded-lg" />
         </div>
           <div className="flex h-16 items-center justify-center gap-3">

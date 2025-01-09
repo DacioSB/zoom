@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import dynamic from "next/dynamic";
+import "@stream-io/video-react-sdk/dist/css/styles.css";
 
 const Toaster = dynamic(
   () => import("../components/ui/toaster").then((mod) => mod.Toaster),
