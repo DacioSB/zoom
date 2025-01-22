@@ -4,6 +4,12 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import dynamic from "next/dynamic";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
+import "react-datepicker/dist/react-datepicker.css";
+
+const StreamClientProvider = dynamic(
+  () => import("../providers/StreamClientProvider"),
+  { ssr: false }
+);
 
 const Toaster = dynamic(
   () => import("../components/ui/toaster").then((mod) => mod.Toaster),
@@ -40,8 +46,10 @@ export default function RootLayout({
         }}
       >
         <body className={`${inter.className} bg-dark-2`}>
-          <Toaster />
-          {children}
+          <StreamClientProvider>
+            <Toaster />
+            {children}
+          </StreamClientProvider>
         </body>
       </ClerkProvider>
     </html>
