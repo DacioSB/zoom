@@ -5,16 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import dynamic from "next/dynamic";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "react-datepicker/dist/react-datepicker.css";
-
-const StreamClientProvider = dynamic(
-  () => import("../providers/StreamClientProvider"),
-  { ssr: false }
-);
-
-const Toaster = dynamic(
-  () => import("../components/ui/toaster").then((mod) => mod.Toaster),
-  { ssr: false }
-);
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,10 +37,8 @@ export default function RootLayout({
         }}
       >
         <body className={`${inter.className} bg-dark-2`}>
-          <StreamClientProvider>
             <Toaster />
             {children}
-          </StreamClientProvider>
         </body>
       </ClerkProvider>
     </html>
